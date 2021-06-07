@@ -9,6 +9,23 @@ class App extends Component {
     text : sampleText
   }
 
+  //Lié à un component statefull, s'exécute au refresh de la page, quand le component se monte
+  componentDidMount(){
+    const text = localStorage.getItem('text');
+
+    if(text){
+      this.setState({text})
+    }else{
+      this.setState({text : sampleText});
+    }
+  }
+
+  //s'exécute quand le component se met à jour
+  componentDidUpdate(){
+    const text = this.state.text;
+    localStorage.setItem('text', text);
+  }
+
   handleChange = (event) => {
     const textCopy = {... this.state.text}
     const text = event.target.value
